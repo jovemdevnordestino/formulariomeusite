@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Briefing para criação de site de projeto de extensão.">
+  <title>Briefing para criação de site</title>
+  <style>
+    :root { color-scheme: light; --navy:#10233f; --blue:#1769d2; --ink:#172033; --muted:#5d6879; --line:#dce3ed; --bg:#f3f6fb; }
+    * { box-sizing: border-box; }
+    body { margin:0; padding:32px 16px; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { max-width:780px; margin:0 auto; }
+    header { padding:28px; color:white; background:linear-gradient(130deg,#10233f,#1769d2); border-radius:18px 18px 0 0; }
+    h1 { margin:0 0 8px; font-size:clamp(1.6rem,4vw,2.2rem); line-height:1.15; }
+    header p { margin:0; color:#e5efff; }
+    form { padding:26px; background:white; border:1px solid var(--line); border-top:0; border-radius:0 0 18px 18px; box-shadow:0 12px 35px #17203312; }
+    fieldset { margin:0 0 24px; padding:0; border:0; }
+    legend { margin-bottom:14px; color:var(--navy); font-size:1.12rem; font-weight:750; }
+    .field { margin:0 0 18px; }
+    label, .question { display:block; margin-bottom:7px; font-weight:650; }
+    .hint { display:block; margin-top:4px; color:var(--muted); font-size:.88rem; font-weight:400; }
+    input, textarea, select { width:100%; padding:12px 13px; border:1px solid #cbd5e1; border-radius:9px; background:#fff; color:var(--ink); font:inherit; }
+    textarea { min-height:92px; resize:vertical; }
+    input:focus, textarea:focus, select:focus { outline:3px solid #1769d225; border-color:var(--blue); }
+    .choice { display:flex; align-items:flex-start; gap:9px; margin:8px 0; font-weight:450; }
+    .choice input { width:auto; margin-top:5px; accent-color:var(--blue); }
+    .choice label { margin:0; font-weight:450; }
+    button { width:100%; padding:14px 18px; border:0; border-radius:10px; background:var(--blue); color:white; font:700 1rem system-ui,sans-serif; cursor:pointer; }
+    button:hover { background:#1056b2; }
+    button:disabled { opacity:.6; cursor:wait; }
+    .status { margin:16px 0 0; padding:12px 14px; border-radius:9px; font-size:.95rem; display:none; }
+    .status.ok { display:block; background:#e8f7ee; color:#14532d; }
+    .status.err { display:block; background:#fdecec; color:#7f1d1d; }
+    footer { padding:16px 4px; color:var(--muted); font-size:.85rem; text-align:center; }
+    @media (max-width:560px) { body { padding:16px 10px; } header, form { padding:20px 16px; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Briefing para criação do site</h1>
+    <p>Responda às 10 perguntas para entendermos o projeto, definir as funcionalidades e preparar o orçamento.</p>
+  </header>
+
+  <form id="briefing">
+    <fieldset>
+      <legend>1. Identificação do projeto</legend>
+      <div class="field">
+        <label for="nome">Qual é o nome do projeto e a instituição/universidade responsável?</label>
+        <input id="nome" name="projeto_instituicao" required>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>2. Objetivo</legend>
+      <div class="field">
+        <label for="objetivo">Qual é o principal objetivo do projeto e o que o site deve ajudar a alcançar?</label>
+        <textarea id="objetivo" name="objetivo" required></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>3. Público-alvo</legend>
+      <div class="field">
+        <label for="publico">Quem deverá acessar o site?</label>
+        <input id="publico" name="publico_alvo" placeholder="Ex.: estudantes, comunidade, professores..." required>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>4. Conteúdo e páginas</legend>
+      <div class="field">
+        <span class="question">Quais seções ou páginas vocês precisam?</span>
+        <span class="hint">Marquem todas as opções desejadas.</span>
+        <div class="choice"><input type="checkbox" id="p1" name="paginas[]" value="Início"><label for="p1">Início</label></div>
+        <div class="choice"><input type="checkbox" id="p2" name="paginas[]" value="Sobre e objetivos"><label for="p2">Sobre e objetivos</label></div>
+        <div class="choice"><input type="checkbox" id="p3" name="paginas[]" value="Equipe"><label for="p3">Equipe</label></div>
+        <div class="choice"><input type="checkbox" id="p4" name="paginas[]" value="Atividades e notícias"><label for="p4">Atividades e notícias</label></div>
+        <div class="choice"><input type="checkbox" id="p5" name="paginas[]" value="Galeria"><label for="p5">Galeria de fotos/vídeos</label></div>
+        <div class="choice"><input type="checkbox" id="p6" name="paginas[]" value="Contato"><label for="p6">Contato</label></div>
+        <div class="choice"><input type="checkbox" id="p7" name="paginas[]" value="Outras"><label for="p7">Outras (detalhar na próxima resposta)</label></div>
+      </div>
+      <div class="field">
+        <label for="outras">Há algum conteúdo ou seção específico que não foi listado?</label>
+        <textarea id="outras" name="conteudo_extra"></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>5. Funcionalidades</legend>
+      <div class="field">
+        <span class="question">O que o visitante deverá conseguir fazer no site?</span>
+        <span class="hint">Marquem todas as opções necessárias.</span>
+        <div class="choice"><input type="checkbox" id="f1" name="funcionalidades[]" value="Enviar mensagem"><label for="f1">Enviar mensagem por formulário</label></div>
+        <div class="choice"><input type="checkbox" id="f2" name="funcionalidades[]" value="Inscrever-se"><label for="f2">Inscrever-se em atividades ou eventos</label></div>
+        <div class="choice"><input type="checkbox" id="f3" name="funcionalidades[]" value="Consultar agenda"><label for="f3">Consultar agenda ou calendário</label></div>
+        <div class="choice"><input type="checkbox" id="f4" name="funcionalidades[]" value="Pesquisar conteúdo"><label for="f4">Pesquisar conteúdos</label></div>
+        <div class="choice"><input type="checkbox" id="f5" name="funcionalidades[]" value="Login e área restrita"><label for="f5">Entrar com login e senha</label></div>
+        <div class="choice"><input type="checkbox" id="f6" name="funcionalidades[]" value="Apenas consultar informações"><label for="f6">Apenas consultar informações</label></div>
+      </div>
+      <div class="field">
+        <label for="detalhe_func">Explique como devem funcionar as opções marcadas (se necessário).</label>
+        <textarea id="detalhe_func" name="detalhes_funcionalidades"></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>6. Atualização do site</legend>
+      <div class="field">
+        <label for="atualizacao">Quem precisará atualizar textos, fotos, notícias ou eventos depois da entrega?</label>
+        <select id="atualizacao" name="responsavel_atualizacao" required>
+          <option value="">Selecione uma opção</option>
+          <option>O desenvolvedor fará as atualizações</option>
+          <option>Integrantes da equipe do projeto</option>
+          <option>Precisamos de um painel para atualizar sozinhos</option>
+          <option>Ainda não sabemos</option>
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>7. Materiais disponíveis</legend>
+      <div class="field">
+        <label for="materiais">Quais materiais vocês já têm e quem vai fornecer o restante?</label>
+        <textarea id="materiais" name="materiais" placeholder="Ex.: logotipo, textos, fotos, vídeos, contatos e responsável pelo envio." required></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>8. Visual e referências</legend>
+      <div class="field">
+        <label for="referencia">Existe identidade visual, cores, logotipo ou algum site de referência?</label>
+        <textarea id="referencia" name="identidade_referencias" placeholder="Se tiverem links de sites de referência, coloquem aqui."></textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>9. Prazo</legend>
+      <div class="field">
+        <label for="prazo">Para quando o site precisa estar pronto?</label>
+        <input id="prazo" name="prazo" placeholder="Ex.: 20/03/2027 ou 'sem data definida'" required>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>10. Domínio, hospedagem e investimento</legend>
+      <div class="field">
+        <label for="infra">O projeto já tem domínio e hospedagem? Quem ficará responsável por essas despesas?</label>
+        <select id="infra" name="dominio_hospedagem" required>
+          <option value="">Selecione uma opção</option>
+          <option>Já temos domínio e hospedagem</option>
+          <option>Precisamos contratar; a equipe do projeto pagará</option>
+          <option>Precisamos contratar; queremos incluir no orçamento</option>
+          <option>Ainda precisamos decidir</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="orcamento">Existe um orçamento previsto para o desenvolvimento?</label>
+        <input id="orcamento" name="orcamento" placeholder="Ex.: até R$ 1.000, R$ 1.500, ainda não definido">
+      </div>
+    </fieldset>
+
+    <button type="submit" id="enviar">Enviar respostas</button>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </form>
+
+  <footer>Briefing de levantamento de requisitos • Desenvolvimento de site</footer>
+</main>
+
+<script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+  // Chave pública (publishable): segura no front-end, protegida por RLS.
+  const supabase = createClient(
+    "https://fzpfebjklshecoeevtra.supabase.co",
+    "sb_publishable_ORHDh82qeSZSt3HG8AUxeQ_D7YD89yV"
+  );
+
+  const form = document.getElementById("briefing");
+  const btn = document.getElementById("enviar");
+  const status = document.getElementById("status");
+
+  function show(msg, ok) {
+    status.textContent = msg;
+    status.className = "status " + (ok ? "ok" : "err");
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const f = new FormData(form);
+    const dados = {
+      projeto_instituicao: f.get("projeto_instituicao"),
+      objetivo: f.get("objetivo"),
+      publico_alvo: f.get("publico_alvo"),
+      paginas: f.getAll("paginas[]"),
+      conteudo_extra: f.get("conteudo_extra") || null,
+      funcionalidades: f.getAll("funcionalidades[]"),
+      detalhes_funcionalidades: f.get("detalhes_funcionalidades") || null,
+      responsavel_atualizacao: f.get("responsavel_atualizacao"),
+      materiais: f.get("materiais"),
+      identidade_referencias: f.get("identidade_referencias") || null,
+      prazo: f.get("prazo"),
+      dominio_hospedagem: f.get("dominio_hospedagem"),
+      orcamento: f.get("orcamento") || null,
+    };
+
+    btn.disabled = true;
+    btn.textContent = "Enviando...";
+    const { error } = await supabase.from("briefing_respostas").insert(dados);
+    btn.disabled = false;
+    btn.textContent = "Enviar respostas";
+
+    if (error) {
+      show("Não foi possível enviar agora. Tente novamente em instantes.", false);
+      console.error(error);
+      return;
+    }
+    form.reset();
+    show("Respostas enviadas com sucesso. Obrigado!", true);
+  });
+</script>
+</body>
+</html>
